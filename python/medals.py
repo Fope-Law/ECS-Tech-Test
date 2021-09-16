@@ -20,7 +20,25 @@ medalResults = [
 def createMedalTable(results):
     # Use the results object above to create a medal table
     # The winner gets 3 points, second place 2 points and third place 1 point
-    return
+    position_points = {
+    1: 3,
+    2: 2,
+    3: 1 }
+
+    medalTable = {}
+    
+    for result in results:
+        for team in result["podium"]:
+            tmp = team.split(".")
+            tmp_position = tmp[0]
+            tmp_team = tmp[1]  
+            
+            if tmp_team in medalTable:
+                medalTable[tmp_team] += position_points[int(tmp_position)]
+            else:
+                medalTable[tmp_team] = position_points[int(tmp_position)]
+ 
+    return medalTable
 
 
 def test_function():
